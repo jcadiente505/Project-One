@@ -8,40 +8,50 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/style.css">
+  
 
   <title>FoodFinder</title>
 </head>
 
 <body>
-  <div class="jumbotron">
+  <div class="jumbotron text-center">
     <h1 class="display-4">Restaurant Finder!</h1>
     <p class="lead">Enter your zip code and price range!</p>
   </div>
 
   <div class="container">
     <form>
-      <div class="form-group">
-        <label for="zipCode"><h5>Enter a zipcode</h5></label>
-        <input type="text" class="form-control w-25" id="zipCode" placeholder="Zip">
-      </div>
-      <button onclick="getLocation()">Use my curent location</button>
-      <p id="location"></p>
+      <label for="zipCode">
+        <h5>Enter a zipcode</h5>
+      </label>
+      <div class="form-group form-inline">
+        <input type="text" class="form-control" id="zipCode" placeholder="Zip" style="width:10%">
+        <button type="submit" class="ml-2 mr-3">Submit</button><h6 class="mx-3">OR</h6>
+      <button onclick="getLocation()" class="mx-3">Use my curent location</button>
+      <p id="location"></p></div>
     </form>
+    <br>
+    <h5 class="mr-3">Price Range</h5>
 
-    
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        Price Range
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">$</a>
-        <a class="dropdown-item" href="#">$$</a>
-        <a class="dropdown-item" href="#">$$$</a>
-        <a class="dropdown-item" href="#">$$$$</a>
-      </div>
+    <div class="input-group mb-3 float-left" style="width:10%">
+      <select class="custom-select" id="priceOption1">
+        <option disabled>Choose...</option>
+        <option value="1" selected>$</option>
+        <option value="2">$$</option>
+        <option value="3">$$$</option>
+        <option value="4">$$$$</option>
+      </select>
     </div>
-
+    <h6 class="float-left mx-3">to</h6>
+    <div class="input-group mb-3" style="width:10%">
+      <select class="custom-select" id="priceOption2">
+        <option disabled>Choose...</option>
+        <option value="1">$</option>
+        <option value="2">$$</option>
+        <option value="3">$$$</option>
+        <option value="4" selected>$$$$</option>
+      </select>
+    </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="card">
@@ -56,7 +66,7 @@
     </div>
 
 
-    
+
   </div>
 
 </body>
