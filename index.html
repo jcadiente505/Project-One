@@ -14,18 +14,21 @@
 
 <body>
   <div class="jumbotron">
-      <h1 class="display-4">Restaurant Finder!</h1>
-      <p class="lead">Enter your zip code and price range!</p>
+    <h1 class="display-4">Restaurant Finder!</h1>
+    <p class="lead">Enter your zip code and price range!</p>
   </div>
 
   <div class="container">
     <form>
-      <div class="form-group"></div>
-      <label for="zipCode"></label>
-      <input type="text" class="form-control w-25" id="zipCode" placeholder="Zip">
-
+      <div class="form-group">
+        <label for="zipCode"><h5>Enter a zipcode</h5></label>
+        <input type="text" class="form-control w-25" id="zipCode" placeholder="Zip">
+      </div>
+      <button onclick="getLocation()">Use my curent location</button>
+      <p id="location"></p>
     </form>
 
+    
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
@@ -53,11 +56,7 @@
     </div>
 
 
-    <p>Click to use your curent location</p>
-
-    <button onclick="getLocation()">Try It</button>
-
-    <p id="location"></p>
+    
   </div>
 
 </body>
