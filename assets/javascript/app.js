@@ -6,19 +6,20 @@ function restaurantGenerator() {
     var queryURL = "https://api.yelp.com/v3/businesses/search/location=" + location + "";
 
     // Creating an AJAX call for the specific movie button being clicked
-    $.ajax({
-      url: queryURL,
-      method: "GET",
-      headers: {
-        authorization: "Bearer xxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    // $.ajax({
+    //   url: queryURL,
+    //   method: "GET",
+    //   headers: {
+    //     authorization: "Bearer r4tHEAx0_RoSv1YoH333ehyVe30h1Y4QHVtbeMt6HDoKXsalEFLBpwSL7Qw8cXYgtEK4Osk72XJ-qpHUqxT_Jci-gzE2hnunA27YZGGAtgMrCEEdIT_rBO3Q1Wc1W3Yx"
         
         
-      }
-    }).then(function(response) {
+    //   }
+    // }).then(function(response) {
 
+    //     console.log(response);
 
-
-    });    
+    // });    
+    console.log("working function call");
 }
 
 var config = {
@@ -45,7 +46,10 @@ var x = document.getElementById("location");
 // ---------firebase on value listener--------------//
 
 // ----------button click listeners---------------//
-
+$("#test-btn").on("click", function(){
+    restaurantGenerator();
+    console.log("working click");
+});
 
 // ----------AJAX Method Yelp---------------//
 
