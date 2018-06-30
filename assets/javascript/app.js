@@ -36,6 +36,12 @@ database = firebase.database();
 
 // --------------create variables----------------//
 var x = document.getElementById("location");
+// geocoder variables
+var geoCoder
+var map
+var marker
+var latitude
+var longitude
 // user input variables
 // firebase database user object
 // dynamic content variables
@@ -68,8 +74,12 @@ function getLocation() {
 }
 
 function showPosition(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
     x.innerHTML = "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;
+    console.log(latitude);
+    console.log(longitude);
 }
 
 
