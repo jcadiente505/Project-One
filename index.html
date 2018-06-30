@@ -5,67 +5,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="assets/style.css">
-  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Cherry+Cream+Soda" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
   <title>FoodFinder</title>
 </head>
 
 <body>
-  <div id="pageHeader" class="jumbotron text-center" style="background-image:url(assets/images/table-food.jpg)">
-    <h1 class="display-4">Food Finder</h1>
+  <!-- Jumbotron -->
+  <div id="pageHeader" class="jumbotron text-center">
+    <h1 id="header-title" class="display-5 font-weight-bold m-0" style="font-size:60px; letter-spacing:5px; opacity:1">Food Finder</h1>
     <p class="lead">Enter your zip code and price range!</p>
   </div>
 
   <div class="container">
-    <form>
-      <label for="zipCode">
-        <h5>Enter a zipcode</h5>
-      </label>
-      <div class="form-group form-inline">
-        <input type="text" class="form-control" id="zipCode" placeholder="Zip" style="width:10%">
-        <button type="submit" class="ml-2 mr-3">Submit</button><h6 class="mx-3">OR</h6>
-      <button onclick="getLocation()" class="mx-3">Use my curent location</button>
-      <p id="location"></p></div>
-    </form>
-    <br>
-    <h5 class="mr-3">Price Range</h5>
-
-    <div class="input-group mb-3 float-left" style="width:10%">
-      <select class="custom-select" id="priceOption1">
-        <option disabled>Choose...</option>
-        <option value="1" selected>$</option>
-        <option value="2">$$</option>
-        <option value="3">$$$</option>
-        <option value="4">$$$$</option>
-      </select>
-    </div>
-    <h6 class="float-left mx-3">to</h6>
-    <div class="input-group mb-3" style="width:10%">
-      <select class="custom-select" id="priceOption2">
-        <option disabled>Choose...</option>
-        <option value="1">$</option>
-        <option value="2">$$</option>
-        <option value="3">$$$</option>
-        <option value="4" selected>$$$$</option>
-      </select>
-    </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-9">
+        <!-- Form for getting zipcode/location -->
+        <form>
+          <label for="zipCode">
+            <h5>Enter a zipcode</h5>
+          </label>
+          <div class="form-group form-inline">
+            <input type="text" class="form-control" id="zipCode" placeholder="Zip" style="width:10%">
+            <button type="submit" class="ml-2 mr-3">Submit</button>
+            <h6 class="mx-3">OR</h6>
+            <button onclick="getLocation()" class="mx-3">Use my curent location</button>
+            <p id="location"></p>
+          </div>
+        </form>
+
+        <br>
+        <!-- Price Range dropdowns -->
+        <h5 class="mr-3">Price Range</h5>
+        <div class="input-group mb-3 float-left" style="width:10%">
+          <select class="custom-select" id="priceOption1">
+            <option disabled>Choose...</option>
+            <option value="1" selected>$</option>
+            <option value="2">$$</option>
+            <option value="3">$$$</option>
+            <option value="4">$$$$</option>
+          </select>
+        </div>
+        <h6 class="float-left mx-3">to</h6>
+        <div class="input-group mb-3" style="width:10%">
+          <select class="custom-select" id="priceOption2">
+            <option disabled>Choose...</option>
+            <option value="1">$</option>
+            <option value="2">$$</option>
+            <option value="3">$$$</option>
+            <option value="4" selected>$$$$</option>
+          </select>
+        </div>
+
+        <!-- Div for generated restaurant info -->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title float-left">Restaurant Name</h5>
+                <a href="#" class="btn btn-primary float-left mx-4">How do I get there?</a>
+                <a href="#" class="btn btn-primary float-left mx-4">Maybe another time.</a>
+                <a href="#" class="btn btn-primary ml-4">Not interested</a>
+                <p class="card-text">CAROUSEL GOES HERE</p>
+                
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar for restaurants to try later -->
+      <div class="col-3 w-100 h-100 px-0">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Let's Go!</a>
-            <a href="#" class="btn btn-warning">Not interested</a>
-            <div id="map"></div>
+            <h5 class="card-title"><u>I'm interested in trying these</u></h5>
+            <p class="card-text"><a href="#" class="card-link">Papa Ricco's</a></p>
+            <p class="card-text"><a href="#" class="card-link">Sweet Tomatoes</a></p>
           </div>
         </div>
       </div>
     </div>
-
-
-
   </div>
 
 </body>

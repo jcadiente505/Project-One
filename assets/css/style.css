@@ -1,18 +1,9 @@
 #pageHeader {
     background-image: url(../images/table-food.jpg);
-    background-color: blanchedalmond;
-    text-align: center;
-}
+    font-family: 'Cherry Cream Soda', cursive;
+    opacity:0.5;
+};
 
-.container {
-    text-align: center;
+#header-title {
+    opacity: 1;
 }
-
-.buttons {
-    background-color: blue
-}
-
-#zipCode {
-    text-align: center;
-}
-
