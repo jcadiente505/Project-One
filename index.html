@@ -58,7 +58,7 @@
     <div class="row">
       <div class="col-9">
         <!-- Form for getting zipcode/location -->
-        <form>
+        <!--<form>
           <label for="zipCode">
             <h5>Enter a zipcode</h5>
           </label>
@@ -69,11 +69,11 @@
             <button onclick="getLocation()" class="mx-3">Use my curent location</button>
             <p id="location"></p>
           </div>
-        </form>
+        </form>-->
 
         <br>
         <!-- Price Range dropdowns -->
-        <h5 class="mr-3">Price Range</h5>
+        <!--<h5 class="mr-3">Price Range</h5>
         <div class="input-group mb-3 float-left" style="width:10%">
           <select class="custom-select" id="priceOption1">
             <option disabled>Choose...</option>
@@ -92,18 +92,19 @@
             <option value="3">$$$</option>
             <option value="4" selected>$$$$</option>
           </select>
-        </div>
+        </div>-->
 
         <!-- Div for generated restaurant info -->
         <div class="row">
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title float-left">Restaurant Name</h5>
+                <!--<h5 class="card-title float-left"></h5>-->
+                <h5 class="card-title">Your suggested restaurant is:</h5>
                 <a href="#" class="btn btn-primary float-left mx-4">How do I get there?</a>
                 <a href="#" class="btn btn-primary float-left mx-4">Maybe another time.</a>
                 <a href="#" class="btn btn-primary ml-4">Not interested</a>
-                <p class="card-text">CAROUSEL GOES HERE</p>
+                <!--<p class="card-text">CAROUSEL GOES HERE</p> -->
 
                 <div id="map"></div>
               </div>
@@ -112,7 +113,7 @@
         </div>
       </div>
 
-      <!-- Sidebar for restaurants to try later -->
+      <!-- Sidebar for restaurants to try later--> 
       <div class="col-3 w-100 h-100 px-0">
         <div class="card">
           <div class="card-body">
@@ -130,61 +131,58 @@
       </div>
     </div>
 
-    <div class="card mb-3">
-        <div id="demo" class="carousel slide" data-ride="carousel">
+    <div class="card">
+      <div id="demo" class="carousel slide" data-ride="carousel">
 
-            <!-- Indicators -->
-            <ul class="carousel-indicators">
-              <li data-target="#demo" data-slide-to="0" class="active"></li>
-              <li data-target="#demo" data-slide-to="1"></li>
-              <li data-target="#demo" data-slide-to="2"></li>
-            </ul>
-            
-            <!-- The slideshow -->
-            <div class="carousel-inner" style="height: 500px; vertical-align: middle; text-align:center">
-              <div class="carousel-item active">
-                <img src="assets/images/chicken.jpg" alt="Los Angeles" style="width:100%; overflow: hidden; ">
-              </div>
-              <div class="carousel-item">
-                <img src="assets/images/pizza.jpg" alt="Chicago" width="1100" height="500">
-              </div>
-              <div class="carousel-item">
-                <img src="assets/images/steak.jpeg" alt="New York" width="1100" height="500">
-              </div>
+        <div class="card-body">
+          
+
+          <!-- Indicators -->
+          <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+          </ul>
+
+          <!-- The slideshow -->
+          <div class="carousel-inner" style="height: 500px; vertical-align: middle; text-align:center">
+            <div class="carousel-item active">
+              <img src="assets/images/chicken.jpg" alt="Los Angeles" width="1100" height="500">
             </div>
-            
-            <!-- Left and right controls -->
-            <a class="carousel-control-prev" href="#demo" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </a>
+            <div class="carousel-item">
+              <img src="assets/images/pizza.jpg" alt="Chicago" width="1100" height="500">
+            </div>
+            <div class="carousel-item">
+              <img src="assets/images/steak.jpeg" alt="New York" width="1100" height="500">
+            </div>
           </div>
 
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Your suggested restaurant is:</p>
-        <!--begin carousel code-->
-
+          <!-- Left and right controls -->
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
       </div>
     </div>
 
 
 
-  
-    
-  </div>
-  
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-  crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-  crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA&libraries=places"></script>
-<script src="assets/javascript/app.js"></script>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA&libraries=places"></script>
+  <script src="assets/javascript/app.js"></script>
 
 </html>
