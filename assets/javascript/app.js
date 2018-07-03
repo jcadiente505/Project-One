@@ -72,7 +72,27 @@ function showPosition(position) {
     "<br>Longitude: " + position.coords.longitude;
 }
 
+function login() {
+    function newLogin(user) {
+        if (user) {
+            //User signed in
+            app(user);
+        } else {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
+    }
 
+    firebase.auth().onAuthStateChanged(newLogin);
+
+};
+
+function app(user){
+    console.log(user.displayname);
+}
+
+
+window.onload = login;
 
 
 
