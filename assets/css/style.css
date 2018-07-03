@@ -1,8 +1,21 @@
+body {
+  background-color: lightblue;
+}
+
+div.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#dice {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 15px 0 rgba(0, 0, 0, 0.19);
+}
 .jumbotron {
   position:relative;
   padding-top:50px;
   padding-bottom:50px;
   font-family: 'Cherry Cream Soda', cursive;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 15px 0 rgba(0, 0, 0, 0.19);
+  text-shadow: 2px 2px lightgrey;
 }
 
 .jumbotron .container {
@@ -31,4 +44,18 @@
     top:0;
     left:0;
     z-index:1;
-};
+}
+
+footer {
+  padding: 30px 0;
+  margin-top: 50px;
+  clear: both;
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+  text-align: center;
+  background: linear-gradient(rgb(210, 210, 210), rgb(150, 150, 150));
+  box-shadow: 3px 3px 6px 6px rgba(0, 0, 0, 0.2), 5px 5px 15px 15px rgba(0, 0, 0, 0.19);
+  border-top: 8px solid #4aaaa5;
+  height: 50px;
+}
