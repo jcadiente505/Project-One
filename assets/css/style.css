@@ -1,15 +1,34 @@
+.jumbotron {
+  position:relative;
+  padding-top:50px;
+  padding-bottom:50px;
+  font-family: 'Cherry Cream Soda', cursive;
+}
+
+.jumbotron .container {
+    
+    position:relative;
+    z-index:2;
+}
+
+@media screen and (max-width: 768px) {
+  .jumbotron {
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+}
+
 #pageHeader {
-    background-image: url(../images/table-food.jpg);
-    font-family: 'Cherry Cream Soda', cursive;
-    opacity:0.5;
+    margin-bottom: 0px;
+    opacity: 0.5;
+    color: #fff;
+    background: #000 url(../images/table-food.jpg) top center no-repeat;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:1;
 };
-
-#header-title {
-    opacity: 1;
-}
-
-#zipCode {
-    text-align: center;
-}
-
-
