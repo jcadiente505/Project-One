@@ -40,8 +40,6 @@ var x = document.getElementById("location");
 var geoCoder
 var map
 var marker
-var latitude
-var longitude
 // user input variables
 // firebase database user object
 // dynamic content variables
@@ -68,23 +66,18 @@ $("#currentlocation").on("click", function (location) {
 
 
 // ----------AJAX Method Google Maps-----------//
+var geocoderURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA"
+var latitude
+var longitude
+$.ajax({
+    url: geocoderURL,
+    method: "GET"
+}).then(function (response) {
 
+})
 
 // ------------Functions-----------------//
 
-function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-}
-
-
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-}
 
 function login() {
     function newLogin(user) {
@@ -101,90 +94,46 @@ function login() {
 
 };
 
-function app(user){
+function app(user) {
     console.log(user.displayname);
 }
 
-
-window.onload = login;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function showPosition(position) {
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(storeLocation);
+    } else {
+        console.log("error")
+    }
+}
+function storeLocation(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    x.innerHTML = "Latitude: " + latitude +
-        "<br>Longitude: " + longitude;
     console.log(latitude);
     console.log(longitude);
-    console.log(position);
-};
+}
 
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 15
+    map = new google.maps.Map($("#map"), {
+        center: { lat: latitude, lng: longitude },
+        zoom: 15
     });
-    console.log("text")
-  };
+};
+
+// ============DIFFERENT APPROACH=======================
+
+// simpleGoogleMapsApiExample.map = function (mapDiv, latitude, longitude) {
+//     var createMap = function (mapDiv, coordinates) {
+//         var mapOptions = {
+//             center: coordinates,
+//             mapTypeId: google.maps.MapTypeId.ROADMAP,
+//             zoom: 15
+//         };
+//         return new google.maps.Map(mapDiv, mapOptions);
+//     };
+//     var initialize = function (mapDiv, latitude, longitude) {
+//         var coordinates = new google.maps.LatLng(latitude, longitude);
+//         createMap(mapDiv, coordinates);
+//     };
+//     initialize(mapDiv, latitude, longitude);
+// };
+window.onload = login;
