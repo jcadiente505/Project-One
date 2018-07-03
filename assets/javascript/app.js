@@ -72,14 +72,44 @@ $("#currentlocation").on("click", function (location) {
 
 // ------------Functions-----------------//
 
-async function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-    var initMapvar = await initMap();
+function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function showPosition(position) {
     latitude = position.coords.latitude;
@@ -92,10 +122,9 @@ function showPosition(position) {
 };
 
 function initMap() {
-    return new Promise(resolve => {
-        map = new google.maps.Map($('#map'), {
-            center: { lat: latitude, lng: longitude },
-            zoom: 15
-        });
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 15
     });
-};
+    console.log("text")
+  };
