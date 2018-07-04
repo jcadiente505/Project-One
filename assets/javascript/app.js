@@ -59,6 +59,9 @@ $("#currentlocation").on("click", function (location) {
     event.preventDefault();
     getLocation();
     //showPosition();
+    var allowBlock = confirm("Know your location")
+    if (allowBlock == true){
+    $("#zipCode").html(longitude + "," + latitude);};
     console.log("test")
 })
 
