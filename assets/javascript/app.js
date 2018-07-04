@@ -130,7 +130,7 @@ function initMap(latlong) {
     console.log(longitude)
     var latlng = new google.maps.LatLng(latlong.latitude, latlong.longitude);
     var myOptions = {
-        zoom: 17,
+        zoom: 14,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -150,9 +150,12 @@ function initMap(latlong) {
 
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-      }
+      //Randomize
+      var rng = Math.floor((Math.random() * results.length) + 1);
+      var randomRestaurant = results[rng];
+      $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
+      console.log(randomRestaurant);
+      createMarker(randomRestaurant);
     }
   }
   
@@ -168,7 +171,6 @@ function callback(results, status) {
       infowindow.open(map, this);
     });
   }
-window.onload = login;
 
 //java for dice roll
 var roll1 = 0
@@ -182,3 +184,4 @@ $("#dice").click(function() {
     console.log(roll1, roll2, totalRoll);
 });
 
+window.onload = login;
