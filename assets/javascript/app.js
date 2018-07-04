@@ -137,3 +137,58 @@ function initMap() {
 //     initialize(mapDiv, latitude, longitude);
 // };
 window.onload = login;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//java for dice roll
+var roll1 = 0
+var roll2 = 0
+var totalRoll = (roll1 + roll2)
+// devlare images to an array in global scope [roll1 - 1]
+$("#dice").click(function() {
+    var roll1 = Math.floor((Math.random() * 6) + 1);    
+    var roll2 = Math.floor((Math.random() * 6) + 1);
+    var totalRoll = (roll1 + roll2)
+    console.log(roll1, roll2, totalRoll);
+});
+
