@@ -138,48 +138,6 @@ function initMap() {
 // };
 window.onload = login;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //java for dice roll
 var roll1 = 0
 var roll2 = 0
