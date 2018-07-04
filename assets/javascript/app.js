@@ -38,11 +38,12 @@ database = firebase.database();
 var x = document.getElementById("location");
 // geocoder variables
 var geoCoder
-var map
 var marker
 var latitude
 var longitude
 var latlng
+var infowindow
+var map
 // user input variables
 var options = {
     enableHighAccuracy: true,
@@ -129,15 +130,42 @@ function initMap(latlong) {
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("map"),
+    map = new google.maps.Map(document.getElementById("map"),
     myOptions);
 
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+      location: latlng,
+      radius: 1000,
+      type: ['restaurant']
+    }, callback);
     // map = new google.maps.Map($("#map"), {
     //     center: { lat: -34.397, lng: 150.644 },
     //     zoom: 15
     // }).then(() => {console.log(map)});
     // console.log(map)
 };
+
+function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+      }
+    }
+  }
+  
+  function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+  
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(place.name);
+      infowindow.open(map, this);
+    });
+  }
 // ============DIFFERENT APPROACH=======================
 // simpleGoogleMapsApiExample.map = function (mapDiv, latitude, longitude) {
 //     var createMap = function (mapDiv, coordinates) {
