@@ -123,7 +123,7 @@ function initMap(latlong) {
     console.log(longitude)
     var latlng = new google.maps.LatLng(latlong.latitude, latlong.longitude);
     var myOptions = {
-        zoom: 17,
+        zoom: 14,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -134,20 +134,21 @@ function initMap(latlong) {
     service.nearbySearch({
       location: latlng,
       radius: 1000,
-      type: ['restaurant']
+      type: ['restaurant'],
+      openNow: true
+
     }, callback);
-    // map = new google.maps.Map($("#map"), {
-    //     center: { lat: -34.397, lng: 150.644 },
-    //     zoom: 15
-    // }).then(() => {console.log(map)});
-    // console.log(map)
+
 };
 
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-      }
+      //Randomize
+      var rng = Math.floor((Math.random() * results.length) + 1);
+      var randomRestaurant = results[rng];
+      $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
+      console.log(randomRestaurant);
+      createMarker(randomRestaurant);
     }
   }
   
@@ -163,23 +164,8 @@ function callback(results, status) {
       infowindow.open(map, this);
     });
   }
-// ============DIFFERENT APPROACH=======================
-// simpleGoogleMapsApiExample.map = function (mapDiv, latitude, longitude) {
-//     var createMap = function (mapDiv, coordinates) {
-//         var mapOptions = {
-//             center: coordinates,
-//             mapTypeId: google.maps.MapTypeId.ROADMAP,
-//             zoom: 15
-//         };
-//         return new google.maps.Map(mapDiv, mapOptions);
-//     };
-//     var initialize = function (mapDiv, latitude, longitude) {
-//         var coordinates = new google.maps.LatLng(latitude, longitude);
-//         createMap(mapDiv, coordinates);
-//     };
-//     initialize(mapDiv, latitude, longitude);
-// };
-window.onload = login;
+
+
 
 //java for dice roll
 var roll1 = 0
@@ -193,3 +179,4 @@ $("#dice").click(function() {
     console.log(roll1, roll2, totalRoll);
 });
 
+window.onload = login;
