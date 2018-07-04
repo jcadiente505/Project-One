@@ -46,6 +46,11 @@ var infowindow
 var map
 var minPrice
 var maxPrice
+var roll1 = 0
+var roll2 = 0
+var totalRoll = (roll1 + roll2)
+minPrice = parseInt($("#priceOption1").val().trim());
+maxPrice = parseInt($("#priceOption2").val().trim());
 // user input variables
 var options = {
     enableHighAccuracy: true,
@@ -68,7 +73,7 @@ $("#test-btn").on("click", function () {
 $("#currentlocation").on("click", function (event) {
 
     event.preventDefault();
-    
+
     // initMap();
 
     getLocation().then(position => {
@@ -76,17 +81,32 @@ $("#currentlocation").on("click", function (event) {
         longitude = position.coords.longitude;
         console.log(latitude)
         console.log(longitude)
-        return {latitude: latitude, longitude: longitude}
+        return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
     //showPosition();
     console.log("test")
 });
 
-minPrice = parseInt($("#priceOption1").val().trim());
-maxPrice = parseInt($("#priceOption2").val().trim());
+$("#showMap").on("click", function () {
+    $("#map").show();
+})
 
-console.log(minPrice);
-console.log(maxPrice);
+$("#dice").on("click", function(){
+    
+    event.preventDefault();
+
+    getLocation().then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude)
+        console.log(longitude)
+        return { latitude: latitude, longitude: longitude }
+    }).then(latlng => initMap(latlng))
+    //showPosition();
+    console.log("test")
+    
+})
+
 // ----------AJAX Method Yelp---------------//
 
 
@@ -135,53 +155,44 @@ function initMap(latlong) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map"),
-    myOptions);
+        myOptions);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
-      location: latlng,
-      radius: 1000,
-      type: ['restaurant'],
-      openNow: true,
-      minPriceLevel: minPrice,
-      maxPriceLevel: maxPrice
+        location: latlng,
+        radius: 1000,
+        type: ['restaurant'],
+        openNow: true,
+        minPriceLevel: minPrice,
+        maxPriceLevel: maxPrice
     }, callback);
+    console.log(minPrice);
+    console.log(maxPrice);
 };
 
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      //Randomize
-      var rng = Math.floor((Math.random() * results.length) + 1);
-      var randomRestaurant = results[rng];
-      $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
-      console.log(randomRestaurant);
-      createMarker(randomRestaurant);
+        //Randomize
+        var rng = Math.floor((Math.random() * results.length) + 1);
+        var randomRestaurant = results[rng];
+        $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
+        console.log(randomRestaurant);
+        createMarker(randomRestaurant);
     }
-  }
-  
-  function createMarker(place) {
+}
+
+function createMarker(place) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location
+        map: map,
+        position: place.geometry.location
     });
-  
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
-  }
 
-//java for dice roll
-var roll1 = 0
-var roll2 = 0
-var totalRoll = (roll1 + roll2)
-// devlare images to an array in global scope [roll1 - 1]
-$("#dice").click(function() {
-    var roll1 = Math.floor((Math.random() * 6) + 1);    
-    var roll2 = Math.floor((Math.random() * 6) + 1);
-    var totalRoll = (roll1 + roll2)
-    console.log(roll1, roll2, totalRoll);
-});
+    google.maps.event.addListener(marker, 'click', function () {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+    });
+}
+
 
 window.onload = login;

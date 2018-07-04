@@ -98,6 +98,7 @@ footer {
 }
 
 #map {
+  display: none; 
   position: initial;
   height: 250px;
   width: 250px;
