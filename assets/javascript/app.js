@@ -192,4 +192,7 @@ $("#dice").click(function() {
     var totalRoll = (roll1 + roll2)
     console.log(roll1, roll2, totalRoll);
 });
+if (totalRoll >= 12) {
+    
+}
 
