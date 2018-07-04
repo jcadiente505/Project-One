@@ -44,6 +44,8 @@ var longitude
 var latlng
 var infowindow
 var map
+var minPrice
+var maxPrice
 // user input variables
 var options = {
     enableHighAccuracy: true,
@@ -78,8 +80,13 @@ $("#currentlocation").on("click", function (event) {
     }).then(latlng => initMap(latlng))
     //showPosition();
     console.log("test")
-})
+});
 
+minPrice = parseInt($("#priceOption1").val().trim());
+maxPrice = parseInt($("#priceOption2").val().trim());
+
+console.log(minPrice);
+console.log(maxPrice);
 // ----------AJAX Method Yelp---------------//
 
 
@@ -134,13 +141,11 @@ function initMap(latlong) {
     service.nearbySearch({
       location: latlng,
       radius: 1000,
-      type: ['restaurant']
+      type: ['restaurant'],
+      openNow: true,
+      minPriceLevel: minPrice,
+      maxPriceLevel: maxPrice
     }, callback);
-    // map = new google.maps.Map($("#map"), {
-    //     center: { lat: -34.397, lng: 150.644 },
-    //     zoom: 15
-    // }).then(() => {console.log(map)});
-    // console.log(map)
 };
 
 function callback(results, status) {
@@ -163,22 +168,6 @@ function callback(results, status) {
       infowindow.open(map, this);
     });
   }
-// ============DIFFERENT APPROACH=======================
-// simpleGoogleMapsApiExample.map = function (mapDiv, latitude, longitude) {
-//     var createMap = function (mapDiv, coordinates) {
-//         var mapOptions = {
-//             center: coordinates,
-//             mapTypeId: google.maps.MapTypeId.ROADMAP,
-//             zoom: 15
-//         };
-//         return new google.maps.Map(mapDiv, mapOptions);
-//     };
-//     var initialize = function (mapDiv, latitude, longitude) {
-//         var coordinates = new google.maps.LatLng(latitude, longitude);
-//         createMap(mapDiv, coordinates);
-//     };
-//     initialize(mapDiv, latitude, longitude);
-// };
 window.onload = login;
 
 //java for dice roll
