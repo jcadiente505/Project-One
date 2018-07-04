@@ -40,7 +40,14 @@ var x = document.getElementById("location");
 var geoCoder
 var map
 var marker
+var latitude
+var longitude
+var latlng
 // user input variables
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000
+};
 // firebase database user object
 // dynamic content variables
 // API queryURL's
@@ -55,9 +62,19 @@ $("#test-btn").on("click", function () {
     console.log("working click");
 });
 
-$("#currentlocation").on("click", function (location) {
+$("#currentlocation").on("click", function (event) {
+
     event.preventDefault();
-    getLocation();
+    
+    // initMap();
+
+    getLocation().then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude)
+        console.log(longitude)
+        return {latitude: latitude, longitude: longitude}
+    }).then(latlng => initMap(latlng))
     //showPosition();
     var allowBlock = confirm("Know your location")
     if (allowBlock == true){
@@ -69,15 +86,7 @@ $("#currentlocation").on("click", function (location) {
 
 
 // ----------AJAX Method Google Maps-----------//
-var geocoderURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA"
-var latitude
-var longitude
-$.ajax({
-    url: geocoderURL,
-    method: "GET"
-}).then(function (response) {
 
-})
 
 // ------------Functions-----------------//
 
@@ -101,29 +110,35 @@ function app(user) {
     console.log(user.displayname);
 }
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(storeLocation);
-    } else {
-        console.log("error")
-    }
-}
-function storeLocation(position) {
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    console.log(latitude);
-    console.log(longitude);
-}
-
-function initMap() {
-    map = new google.maps.Map($("#map"), {
-        center: { lat: latitude, lng: longitude },
-        zoom: 15
+function getLocation(options) {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options);
     });
+    console.log(resolve)
+}
+
+function errorHandle(error) {
+    console.log(error)
+}
+function initMap(latlong) {
+    console.log(latitude);
+    console.log(longitude)
+    var latlng = new google.maps.LatLng(latlong.latitude, latlong.longitude);
+    var myOptions = {
+        zoom: 17,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map"),
+    myOptions);
+
+    // map = new google.maps.Map($("#map"), {
+    //     center: { lat: -34.397, lng: 150.644 },
+    //     zoom: 15
+    // }).then(() => {console.log(map)});
+    // console.log(map)
 };
-
 // ============DIFFERENT APPROACH=======================
-
 // simpleGoogleMapsApiExample.map = function (mapDiv, latitude, longitude) {
 //     var createMap = function (mapDiv, coordinates) {
 //         var mapOptions = {
