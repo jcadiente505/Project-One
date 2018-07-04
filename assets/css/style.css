@@ -99,4 +99,6 @@ footer {
 
 #map {
   position: initial;
+  height: 250px;
+  width: 250px;
 }
