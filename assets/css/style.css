@@ -96,3 +96,9 @@ footer {
   border-top: 8px solid #4aaaa5;
   height: 50px;
 }
+
+#map {
+  position: initial;
+  height: 250px;
+  width: 250px;
+}
