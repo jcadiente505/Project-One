@@ -120,6 +120,10 @@ $("#zipCodeSubmit").on("click", function (event) {
 
 });
 
+$("#logout-btn").on("click",function(){
+    logout();
+});
+
 
 // ----------AJAX Method Google Maps-----------//
 
@@ -142,9 +146,21 @@ function login() {
 
 };
 
+function logout() {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        console.log("log out success");
+      }).catch(function(error) {
+        // An error happened.
+      });
+};
+
 function app(user) {
     $("#username").text(user.displayname);
-}
+    console.log(user);
+};
+
+
 
 function getLocation(options) {
     return new Promise((resolve, reject) => {
