@@ -37,6 +37,7 @@ database = firebase.database();
 // --------------create variables----------------//
 var x = document.getElementById("location");
 // geocoder variables
+var zipCode
 var geoCoder
 var marker
 var latitude
@@ -87,7 +88,7 @@ $("#currentlocation").on("click", function (event) {
     console.log("test")
 });
 
-$("#showMap").on("click", function () {
+$("#buttonChoice1").on("click", function () {
     $("#map").show();
 })
 
@@ -111,6 +112,12 @@ $("#zipCodeSubmit").on("click", function (event) {
     event.preventDefault();
 
     // CODE FOR GETTING LOCATION BASED ON ZIP CODE
+    zipCode = $("#zipCode").val().trim()
+
+    zipLocation().then(latlng => initMap(latlng))
+
+    console.log(event)
+
 });
 
 
@@ -201,6 +208,22 @@ function createMarker(place) {
         infowindow.open(map, this);
     });
 }
+
+function zipLocation() {
+    var geoCoder = new google.maps.Geocoder();
+    var address = zipCode;
+    geoCoder.geocode({ 'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            latitude = results[0].geometry.location.lat();
+            longitude = results[0].geometry.location.lng();
+            console.log(latitude)
+            console.log(longitude)
+        }
+        else {
+            console.log("error")
+        };
+    });
+};
 
 
 window.onload = login;
