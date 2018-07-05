@@ -107,7 +107,11 @@ $("#dice").on("click", function(){
     
 })
 
-// ----------AJAX Method Yelp---------------//
+$("#zipCodeSubmit").on("click", function (event) {
+    event.preventDefault();
+
+    // CODE FOR GETTING LOCATION BASED ON ZIP CODE
+});
 
 
 // ----------AJAX Method Google Maps-----------//
@@ -132,7 +136,7 @@ function login() {
 };
 
 function app(user) {
-    console.log(user.displayname);
+    $("#username").text(user.displayname);
 }
 
 function getLocation(options) {
@@ -145,6 +149,8 @@ function getLocation(options) {
 function errorHandle(error) {
     console.log(error)
 }
+
+//Generate map and call to Google Places API
 function initMap(latlong) {
     console.log(latitude);
     console.log(longitude)
@@ -170,6 +176,7 @@ function initMap(latlong) {
     console.log(maxPrice);
 };
 
+//Callback for handling returned restaurant objectg
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         //Randomize

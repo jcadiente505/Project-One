@@ -39,16 +39,8 @@ div.card {
 }
 
 .jumbotron .container {
-    
     position:relative;
     z-index:2;
-}
-
-@media screen and (max-width: 768px) {
-  .jumbotron {
-    padding-top:20px;
-    padding-bottom:20px;
-  }
 }
 
 #pageHeader {
@@ -83,6 +75,22 @@ button:hover {
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
+#buttonChoice1 {
+  margin-right:1px;
+  width: 30%;
+}
+
+#buttonChoice2 {
+  margin-right:1px;
+  width: 30%;
+}
+
+#buttonChoice3 {
+  margin-right:1px;
+  width: 30%;
+}
+
+
 footer {
   padding: 30px 0;
   margin-top: 50px;
@@ -102,4 +110,142 @@ footer {
   position: initial;
   height: 250px;
   width: 250px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .jumbotron {
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+
+  #user-login {
+    position:absolute;
+    top:125px;
+    right:115px;
+    z-index:3;
+    width: auto;
+  }
+  
+  #zipCodeCard {
+    width:100%;
+    margin-bottom: 10px;
+  }
+  #buttonChoice1 {
+    margin-right:3px;
+    margin-left:0px;
+    width: 33%;
+    padding-left: 3px;
+    padding-right:3px;
+  }
+  #buttonChoice2 {
+    margin-right:3px;
+    width: 33%;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  #buttonChoice3 {
+    margin-right:0px;
+    width: 30%;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media screen and (min-width: 600px) {
+  #zipCodeCard {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  #priceRangeCard {
+    margin-bottom: 10px;
+  }
+  #user-login {
+    position:absolute;
+    top:130px;
+    right:120px;
+    z-index:3;
+    width: auto;
+  }
+  #sidebar {
+    position:absolute;
+    bottom:30px;
+    z-index:6;
+  }
+  #buttonChoice1 {
+    margin-right:6px;
+    margin-left:0px;
+    width: 33%;
+    padding-left: 3px;
+    padding-right:3px;
+  }
+  #buttonChoice2 {
+    margin-right:6px;
+    width: 33%;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  #buttonChoice3 {
+    margin-right:0px;
+    width: 30%;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+  #zipCodeCard {
+    margin-bottom: 10px;
+  }
+  #priceRangeCard {
+    margin-bottom: 10px;
+  }
+  #user-login {
+    position:absolute;
+    top:160px;
+    right:200px;
+    z-index:3;
+    width: auto;
+  }
+  #sidebar {
+    position:absolute;
+    bottom:30px;
+    z-index:6;
+  }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media screen and (min-width: 992px) and (max-width: 1150px) {
+  #zipCodeCard {
+    margin-bottom: 10px;
+  }
+  #priceRangeCard {
+    margin-bottom: 10px;
+  }
+  #user-login {
+    position:absolute;
+    top:160px;
+    right:325px;
+    z-index:3;
+    width: auto;
+  }
+  #sidebar {
+    position:absolute;
+    bottom:30px;
+    z-index:6;
+  }
+}
+
+/* X-Large devices (laptops/desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+  #user-login {
+    position:absolute;
+    top:10px;
+    right:0;
+    z-index:3;
+    width: auto;
+  }
 }
