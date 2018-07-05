@@ -77,9 +77,6 @@ $("#currentlocation").on("click", function (event) {
         return {latitude: latitude, longitude: longitude}
     }).then(latlng => initMap(latlng))
     //showPosition();
-    var allowBlock = confirm("Know your location")
-    if (allowBlock == true){
-    $("#zipCode").html(longitude + "," + latitude);};
     console.log("test")
 })
 
