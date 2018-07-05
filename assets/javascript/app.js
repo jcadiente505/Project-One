@@ -156,7 +156,7 @@ function logout() {
 };
 
 function app(user) {
-    $("#username").text(user.displayname);
+    $("#username").text(user.displayName);
     console.log(user);
 };
 
