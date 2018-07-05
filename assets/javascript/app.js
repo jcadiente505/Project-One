@@ -178,6 +178,7 @@ function callback(results, status) {
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         console.log(randomRestaurant);
         createMarker(randomRestaurant);
+        
     }
 }
 
