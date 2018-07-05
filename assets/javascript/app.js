@@ -80,8 +80,6 @@ $("#currentlocation").on("click", function (event) {
     console.log("test")
 })
 
-// ----------AJAX Method Yelp---------------//
-
 
 // ----------AJAX Method Google Maps-----------//
 
@@ -105,7 +103,7 @@ function login() {
 };
 
 function app(user) {
-    console.log(user.displayname);
+    $("#username").text(user.displayname);
 }
 
 function getLocation(options) {
@@ -118,6 +116,8 @@ function getLocation(options) {
 function errorHandle(error) {
     console.log(error)
 }
+
+//Generate map and call to Google Places API
 function initMap(latlong) {
     console.log(latitude);
     console.log(longitude)
@@ -133,7 +133,7 @@ function initMap(latlong) {
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
       location: latlng,
-      radius: 1000,
+      radius: 10000,
       type: ['restaurant'],
       openNow: true
 
@@ -141,6 +141,7 @@ function initMap(latlong) {
 
 };
 
+//Callback for handling returned restaurant objectg
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       //Randomize
@@ -152,18 +153,20 @@ function callback(results, status) {
     }
   }
   
-  function createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location
-    });
-  
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
-  }
+  //Generate Map Marker for chosen restaurant
+function createMarker(place) {
+var placeLoc = place.geometry.location;
+var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+});
+
+//Listener to display information about map markers  
+google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+});
+}
 
 
 
