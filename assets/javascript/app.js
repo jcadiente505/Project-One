@@ -77,8 +77,14 @@ $("#currentlocation").on("click", function (event) {
         return {latitude: latitude, longitude: longitude}
     }).then(latlng => initMap(latlng))
     //showPosition();
-    console.log("test")
+    console.log(position)
 })
+
+$("#zipCodeSubmit").on("click", function (event) {
+    event.preventDefault();
+
+    // CODE FOR GETTING LOCATION BASED ON ZIP CODE
+});
 
 
 // ----------AJAX Method Google Maps-----------//
