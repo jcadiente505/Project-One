@@ -104,13 +104,14 @@ $("#logout-btn").on("click",function(){
 // ----------Firebase value listener----------//
 
 //Any changes to the users database or page load
-database.ref().on("value", function(snapshot) {
+database.ref("/users/").on("value", function(snapshot) {
 
     //check if the user exists in the database, if so update their data
-    if (snapshot.child(localUser).exists()) {
-        database.ref('/users/' + localUser).set(localUser);
+    if (snapshot.child("/newUser/").exists()) {
+            console.log("it exists");
     } else {
-        database.ref('/users/').push(localUser);
+        database.ref('/users/').push("/newUser/");
+        console.log("to database");
     };
 
 });
@@ -143,8 +144,9 @@ function logout() {
 
 function app(user) {
     $("#username").text(user.displayName);
-    console.log(user.displayName);
+    
     localUser = user.email;
+    console.log(localUser);
     
 };
 
@@ -211,7 +213,7 @@ function callback(results, status) {
     restaurantName = randomRestaurant.name;
     restaurantAddress = randomRestaurant.vicinity;
 
-    firebase.database().ref("/users/testUser").push({
+    firebase.database().ref("/users/" + localUser).push({
         restaurantName: restaurantName,
         restaurantAddress: restaurantAddress,
 
@@ -220,7 +222,7 @@ function callback(results, status) {
 }
 
 //Firebase watcher and initial loader
-firebase.database().ref("/users/testUser").on("child_added", function (snapshot) {
+firebase.database().ref("/users/" + localUser).on("child_added", function (snapshot) {
     restaurantName = snapshot.val().restaurantName;
     restaurantAddress = snapshot.val().restaurantAddress;
     newListItem = $("<li class='card-text'>");
