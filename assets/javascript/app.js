@@ -90,8 +90,12 @@ $("#currentlocation").on("click", function (event) {
     console.log("test")
 });
 
+$("#mapModal").on("shown.bs.modal", function(){
+    initMap();
+})
+
 $("#buttonChoice1").on("click", function () {
-    $("#map").show();
+    $("mapModal").modal("show")
 })
 
 $(".choice").on("click", function () {
