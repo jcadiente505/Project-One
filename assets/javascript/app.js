@@ -185,7 +185,7 @@ firebase.database().ref("/users/testUser").on("child_added", function (snapshot)
     restaurantName = snapshot.val().restaurantName;
     restaurantAddress = snapshot.val().restaurantAddress;
     newListItem = $("<li class='card-text'>");
-    newRestaurantLink = $("<a class='card-link'>");
+    newRestaurantLink = $("<a class='card-link' target='_blank'>");
     var q = restaurantName + " " + restaurantAddress;
     var googleSearch = "http://google.com/search?q="
     newRestaurantLink.attr("href", googleSearch + q);
