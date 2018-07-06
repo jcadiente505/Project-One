@@ -17,23 +17,43 @@
 <body>
   <!--Modal-->
   <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Sorry, no locations near you. Try a different zip.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          </div>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Sorry, no locations near you. Try a different zip.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
+  <!-- Map Modal -->
+  <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Dynamically created map to restaurant -->
+          <div id="map"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Jumbotron -->
   <div class="jumbotron text-center">
     <div id="pageHeader"></div>
@@ -49,11 +69,13 @@
   <!-- User Login Card -->
   <div id="user-login" class="card border-0 mx-3">
     <div class="card-body" style="border: 5px solid transparent; padding: 7px; border-image: url(assets/images/wood-border.jpg) 20% round">
-      
-        <h5 class="float-left mt-1 ml-1">Welcome<span id="username" class="ml-3">(username)</span></h5>
-      
-        <button class="btn btn-sm btn-primary float-right text-center ml-4 mr-1" id="logout-btn">Log out</button>
-      
+
+      <h5 class="float-left mt-1 ml-1">Welcome
+        <span id="username" class="ml-3">(username)</span>
+      </h5>
+
+      <button class="btn btn-sm btn-primary float-right text-center ml-4 mr-1" id="logout-btn">Log out</button>
+
     </div>
   </div>
   <!-- Main Section -->
@@ -78,8 +100,9 @@
                   </div>
                 </form>
               </div>
-            </div></div>
-            <div class="col-xl">
+            </div>
+          </div>
+          <div class="col-xl">
             <div id="priceRangeCard" class="card mr-3 border-0">
               <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
                 <!-- Price Range dropdowns -->
@@ -111,8 +134,9 @@
                   </div>
                 </form>
               </div>
-            </div></div>
-          
+            </div>
+          </div>
+
           <!-- Div for submitting information -->
           <div id="diceCard" class="row">
             <div class="col-xl-12 d-flex justify-content-center mb-2">
@@ -168,8 +192,6 @@
                     </a>
                   </div>
                 </div>
-                <!-- Dynamically created map to restaurant -->
-                <div id="map"></div>
               </div>
             </div>
           </div>
@@ -181,13 +203,15 @@
         <div id="sidebar" class="card border-0">
           <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
             <ul id="tryLater" class="card-title">
-              <h5><u>I'll try these another time</u></h5>
-            <li class="card-text">
-              <a href="#" class="card-link">Papa Ricco's</a>
-            </li>
-            <li class="card-text">
-              <a href="#" class="card-link">Sweet Tomatoes</a>
-            </li>
+              <h5>
+                <u>I'll try these another time</u>
+              </h5>
+              <li class="card-text">
+                <a href="#" class="card-link">Papa Ricco's</a>
+              </li>
+              <li class="card-text">
+                <a href="#" class="card-link">Sweet Tomatoes</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -211,7 +235,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA&libraries=geocode,places"
     async defer></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="assets/javascript/app.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
 
 </html>

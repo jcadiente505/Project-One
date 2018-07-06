@@ -91,7 +91,7 @@ $("#currentlocation").on("click", function (event) {
 });
 
 $("#buttonChoice1").on("click", function () {
-    $("#map").show();
+    $("#mapModal").show();
 })
 
 $(".choice").on("click", function(){
