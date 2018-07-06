@@ -109,12 +109,14 @@ $("#dice").on("click", function(){
 })
 
 $("#zipCodeSubmit").on("click", function (event) {
+
     event.preventDefault();
 
     // CODE FOR GETTING LOCATION BASED ON ZIP CODE
-    zipCode = $("#zipCode").val().trim()
-
-    zipLocation().then(latlng => initMap(latlng))
+    zipCode = parseInt($("#zipCode").val())
+    console.log(zipCode)
+    console.log($("#zipCode").val())
+    geoCode();
 
     console.log(event)
 
@@ -181,6 +183,10 @@ function initMap(latlong) {
     }, callback);
     console.log(minPrice);
     console.log(maxPrice);
+
+    var geoCoder = new google.maps.Geocoder();
+    
+    
 };
 
 //Callback for handling returned restaurant objectg
@@ -209,21 +215,37 @@ function createMarker(place) {
     });
 }
 
-function zipLocation() {
-    var geoCoder = new google.maps.Geocoder();
-    var address = zipCode;
-    geoCoder.geocode({ 'address': address}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-            latitude = results[0].geometry.location.lat();
-            longitude = results[0].geometry.location.lng();
-            console.log(latitude)
-            console.log(longitude)
-        }
-        else {
-            console.log("error")
-        };
-    });
-};
+// function zipLocation() {
+//     var geoCoder = new google.maps.Geocoder();
+//     var address = $("#zipCode").val().trim()
+//     geoCoder.geocode({ 'address': address},(results, status) => {
+//         if (status === google.maps.GeocoderStatus.OK) {
+//             latitude = results[0].geometry.location.lat();
+//             longitude = results[0].geometry.location.lng();
+//             console.log(latitude)
+//             console.log(longitude)
+//         }
+//         else {
+//             alert("unsuccessful because: " + status )
+//         };
+//     });
+// };
 
+    function geoCode() {
+
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+            params:{
+                componentRestrictions: {
+                    postalCode: zipCode
+
+                },
+                key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
+            }
+        }).then(response => {
+            console.log(response)
+        }).catch(error =>{
+            console.log(error)
+        })
+    }
 
 window.onload = login;
