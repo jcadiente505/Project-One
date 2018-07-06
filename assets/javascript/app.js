@@ -87,7 +87,27 @@ $("#currentlocation").on("click", function (event) {
         return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
     //showPosition();
-    console.log(position)
+    console.log("test")
+});
+
+$("#buttonChoice1").on("click", function () {
+    $("#map").show();
+})
+
+$(".choice").on("click", function(){
+    
+    event.preventDefault();
+
+    getLocation().then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude)
+        console.log(longitude)
+        return { latitude: latitude, longitude: longitude }
+    }).then(latlng => initMap(latlng))
+    //showPosition();
+    console.log("test")
+    
 })
 
 $("#zipCodeSubmit").on("click", function (event) {
@@ -292,4 +312,8 @@ function createMarker(place) {
             console.log(error)
         })
     }
+
+window.onload = login;
+
+
 
