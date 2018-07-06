@@ -98,7 +98,7 @@ $("#buttonChoice1").on("click", function () {
     $("mapModal").modal("show")
 })
 
-$("#dice").on("click", function () {
+$(".choice").on("click", function () {
 
     event.preventDefault();
 
