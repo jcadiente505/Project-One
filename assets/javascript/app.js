@@ -87,13 +87,40 @@ $("#currentlocation").on("click", function (event) {
         return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
     //showPosition();
-    console.log(position)
+    console.log("test")
+});
+
+$("#buttonChoice1").on("click", function () {
+    $("#map").show();
+})
+
+$(".choice").on("click", function(){
+    
+    event.preventDefault();
+
+    getLocation().then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude)
+        console.log(longitude)
+        return { latitude: latitude, longitude: longitude }
+    }).then(latlng => initMap(latlng))
+    //showPosition();
+    console.log("test")
+    
 })
 
 $("#zipCodeSubmit").on("click", function (event) {
+
     event.preventDefault();
 
     // CODE FOR GETTING LOCATION BASED ON ZIP CODE
+    zipCode = parseInt($("#zipCode").val())
+    console.log(zipCode)
+    console.log($("#zipCode").val())
+    geoCode();
+
+    console.log(event)
 });
 
 $("#logout-btn").on("click",function(){
@@ -184,7 +211,6 @@ function initMap(latlong) {
         openNow: true
 
     }, callback);
-
 };
 
 //Callback for handling returned restaurant objectg
@@ -256,21 +282,40 @@ function createMarker(place) {
     });
 }
 
+// function zipLocation() {
+//     var geoCoder = new google.maps.Geocoder();
+//     var address = $("#zipCode").val().trim()
+//     geoCoder.geocode({ 'address': address},(results, status) => {
+//         if (status === google.maps.GeocoderStatus.OK) {
+//             latitude = results[0].geometry.location.lat();
+//             longitude = results[0].geometry.location.lng();
+//             console.log(latitude)
+//             console.log(longitude)
+//         }
+//         else {
+//             alert("unsuccessful because: " + status )
+//         };
+//     });
+// };
 
-//java for dice roll
-var roll1 = 0
-var roll2 = 0
-var totalRoll = (roll1 + roll2)
-// devlare images to an array in global scope [roll1 - 1]
-$("#dice").click(function () {
-    var roll1 = Math.floor((Math.random() * 6) + 1);
-    var roll2 = Math.floor((Math.random() * 6) + 1);
-    var totalRoll = (roll1 + roll2)
-    console.log(roll1, roll2, totalRoll);
-});
+    function geoCode() {
+
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+            params:{
+                componentRestrictions: {
+                    postalCode: zipCode
+
+                },
+                key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
+            }
+        }).then(response => {
+            console.log(response)
+        }).catch(error =>{
+            console.log(error)
+        })
+    }
 
 window.onload = login;
-
 
 
 
