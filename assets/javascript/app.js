@@ -94,7 +94,7 @@ $("#buttonChoice1").on("click", function () {
     $("#map").show();
 })
 
-$("#dice").on("click", function () {
+$(".choice").on("click", function () {
 
     event.preventDefault();
 
