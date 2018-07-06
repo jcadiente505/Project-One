@@ -34,26 +34,6 @@
       </div>
     </div>
   </div>
-  <!-- Map Modal -->
-  <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- Dynamically created map to restaurant -->
-          <div id="map"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Jumbotron -->
   <div class="jumbotron text-center">
     <div id="pageHeader"></div>
@@ -61,7 +41,7 @@
       <div class="row">
         <div class="col-xl-12">
           <h1 id="header-title" class="display-5 font-weight-bold m-0" style="font-size:60px; letter-spacing:5px; opacity:1">Food Finder</h1>
-          <p class="lead">Enter your zip code and price range!</p>
+          <p class="lead">Helping you decide where to eat!</p>
         </div>
       </div>
     </div>
@@ -83,7 +63,7 @@
     <div class="row">
       <div class="col-xl-9">
         <div class="row">
-          <div class="col-xl-7">
+          <div class="col-xl-7 d-none">
             <!-- Form for getting zipcode/location -->
             <div id="zipCodeCard" class="card border-0">
               <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
@@ -100,9 +80,8 @@
                   </div>
                 </form>
               </div>
-            </div>
-          </div>
-          <div class="col-xl">
+            </div></div>
+            <div class="col-xl d-none">
             <div id="priceRangeCard" class="card mr-3 border-0">
               <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
                 <!-- Price Range dropdowns -->
@@ -202,16 +181,8 @@
       <div class="col-xl-3 px-0" style="position:relative; overflow: hidden">
         <div id="sidebar" class="card border-0">
           <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
+              <h5><u>I'll try these another time</u></h5>
             <ul id="tryLater" class="card-title">
-              <h5>
-                <u>I'll try these another time</u>
-              </h5>
-              <li class="card-text">
-                <a href="#" class="card-link">Papa Ricco's</a>
-              </li>
-              <li class="card-text">
-                <a href="#" class="card-link">Sweet Tomatoes</a>
-              </li>
             </ul>
           </div>
         </div>
