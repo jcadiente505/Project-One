@@ -80,7 +80,7 @@
               </div>
             </div></div>
             <div class="col-xl">
-            <div id="priceRangeCard" class="card mr-3 ml-2 border-0">
+            <div id="priceRangeCard" class="card mr-3 border-0">
               <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
                 <!-- Price Range dropdowns -->
                 <form>
@@ -114,8 +114,8 @@
             </div></div>
           
           <!-- Div for submitting information -->
-          <div class="row w-100">
-            <div class="col-xl-12 d-flex justify-content-center m-3">
+          <div id="diceCard" class="row">
+            <div class="col-xl-12 d-flex justify-content-center mb-2">
               <div class="card border-0">
                 <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
                   <h5>Roll the dice for a suggestion!
@@ -177,18 +177,18 @@
       </div>
 
       <!-- Sidebar for restaurants to try later-->
-      <div id="sidebar" class="col-xl-3 px-0" style="position:relative; overflow: hidden">
-        <div class="card border-0" style="position:absolute; top:0; height: 100%">
+      <div class="col-xl-3 px-0" style="position:relative; overflow: hidden">
+        <div id="sidebar" class="card border-0">
           <div class="card-body" style="border: 10px solid transparent; padding: 15px; border-image: url(assets/images/wood-border.jpg) 20% round">
-            <h5 class="card-title">
-              <u>I'll try these another time</u>
-            </h5>
-            <p class="card-text">
+            <ul id="tryLater" class="card-title">
+              <h5><u>I'll try these another time</u></h5>
+            <li class="card-text">
               <a href="#" class="card-link">Papa Ricco's</a>
-            </p>
-            <p class="card-text">
+            </li>
+            <li class="card-text">
               <a href="#" class="card-link">Sweet Tomatoes</a>
-            </p>
+            </li>
+            </ul>
           </div>
         </div>
       </div>
