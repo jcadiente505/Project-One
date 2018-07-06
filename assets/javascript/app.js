@@ -94,8 +94,8 @@ $("#buttonChoice1").on("click", function () {
     $("#map").show();
 })
 
-$(".choice").on("click", function(){
-    
+$("#dice").on("click", function () {
+
     event.preventDefault();
 
     getLocation().then(position => {
@@ -107,7 +107,7 @@ $(".choice").on("click", function(){
     }).then(latlng => initMap(latlng))
     //showPosition();
     console.log("test")
-    
+
 })
 
 $("#zipCodeSubmit").on("click", function (event) {
@@ -123,7 +123,7 @@ $("#zipCodeSubmit").on("click", function (event) {
     console.log(event)
 });
 
-$("#logout-btn").on("click",function(){
+$("#logout-btn").on("click", function () {
     logout();
 });
 
@@ -131,7 +131,7 @@ $("#logout-btn").on("click",function(){
 // ----------Firebase value listener----------//
 
 //Any changes to the users database or page load
-database.ref().on("value", function(snapshot) {
+database.ref().on("value", function (snapshot) {
 
     //check if the user exists in the database, if so update their data
     if (snapshot.child(localUser).exists()) {
@@ -160,19 +160,19 @@ function login() {
 };
 
 function logout() {
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(function () {
         // Sign-out successful.
         console.log("log out success");
-      }).catch(function(error) {
+    }).catch(function (error) {
         // An error happened.
-      });
+    });
 };
 
 function app(user) {
     $("#username").text(user.displayName);
     console.log(user.displayName);
     localUser = user.email;
-    
+
 };
 
 
@@ -180,8 +180,8 @@ function app(user) {
 function getLocation(options) {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        console.log(resolve)
     });
-    console.log(resolve)
 }
 
 function errorHandle(error) {
@@ -220,7 +220,7 @@ function callback(results, status) {
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         console.log(randomRestaurant);
         createMarker(randomRestaurant);
-        
+
     } else if (results.length === 0) {
         $('#errorModal').modal('show');
     }
@@ -229,20 +229,20 @@ function callback(results, status) {
     newRestaurantLink = $("<a class='card-link'>");
 
     $("#buttonChoice2").on("click", function () {
-        newRestaurantLink.text(randomRestaurant.name);
-        newListItem.append(newRestaurantLink);
-        $("#tryLater").append(newListItem);
+        // newRestaurantLink.text(randomRestaurant.name);
+        // newListItem.append(newRestaurantLink);
+        // $("#tryLater").append(newListItem);
+
+        //Function to push restaurant name and address to Firebase
+        restaurantName = randomRestaurant.name;
+        restaurantAddress = randomRestaurant.vicinity;
+
+        firebase.database().ref("/users/testUser").push({
+            restaurantName: restaurantName,
+            restaurantAddress: restaurantAddress,
+
+        });
     });
-    //Function to push restaurant name and address to Firebase
-    restaurantName = randomRestaurant.name;
-    restaurantAddress = randomRestaurant.vicinity;
-
-    firebase.database().ref("/users/testUser").push({
-        restaurantName: restaurantName,
-        restaurantAddress: restaurantAddress,
-
-    });
-
 }
 
 //Firebase watcher and initial loader
@@ -250,7 +250,7 @@ firebase.database().ref("/users/testUser").on("child_added", function (snapshot)
     restaurantName = snapshot.val().restaurantName;
     restaurantAddress = snapshot.val().restaurantAddress;
     newListItem = $("<li class='card-text'>");
-    newRestaurantLink = $("<a class='card-link'>");
+    newRestaurantLink = $("<a class='card-link' target='_blank'>");
     var q = restaurantName + " " + restaurantAddress;
     var googleSearch = "http://google.com/search?q="
     newRestaurantLink.attr("href", googleSearch + q);
@@ -259,8 +259,8 @@ firebase.database().ref("/users/testUser").on("child_added", function (snapshot)
     $("#tryLater").append(newListItem);
     console.log(restaurantName);
     console.log(restaurantAddress);
-    
-    
+
+
     $(".card-link").on("click", function () {
         window.open('http://google.com/search?q=' + q);
     });
@@ -296,22 +296,22 @@ function createMarker(place) {
 //     });
 // };
 
-    function geoCode() {
+function geoCode() {
 
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-            params:{
-                componentRestrictions: {
-                    postalCode: zipCode
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+            componentRestrictions: {
+                postalCode: zipCode
 
-                },
-                key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
-            }
-        }).then(response => {
-            console.log(response)
-        }).catch(error =>{
-            console.log(error)
-        })
-    }
+            },
+            key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
+        }
+    }).then(response => {
+        console.log(response)
+    }).catch(error => {
+        console.log(error)
+    })
+}
 
 window.onload = login;
 
