@@ -44,8 +44,16 @@ var longitude
 var latlng
 var infowindow
 var map
+var minPrice
+var maxPrice
+var localUser
+var roll1 = 0
+var roll2 = 0
+var totalRoll = (roll1 + roll2)
 var restaurantName
 var restaurantAddress
+minPrice = parseInt($("#priceOption1").val().trim());
+maxPrice = parseInt($("#priceOption2").val().trim());
 // user input variables
 var options = {
     enableHighAccuracy: true,
@@ -93,9 +101,19 @@ $("#logout-btn").on("click",function(){
 });
 
 
-// ----------AJAX Method Google Maps-----------//
+// ----------Firebase value listener----------//
 
+//Any changes to the users database or page load
+database.ref().on("value", function(snapshot) {
 
+    //check if the user exists in the database, if so update their data
+    if (snapshot.child(localUser).exists()) {
+        database.ref('/users/' + localUser).set(localUser);
+    } else {
+        database.ref('/users/').push(localUser);
+    };
+
+});
 // ------------Functions-----------------//
 
 
@@ -125,7 +143,9 @@ function logout() {
 
 function app(user) {
     $("#username").text(user.displayName);
-    console.log(user);
+    console.log(user.displayName);
+    localUser = user.email;
+    
 };
 
 
@@ -167,13 +187,16 @@ function initMap(latlong) {
 
 //Callback for handling returned restaurant objectg
 function callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
+    if (status === google.maps.places.PlacesServiceStatus.OK && results.length != 0) {
         //Randomize
         var rng = Math.floor((Math.random() * results.length) + 1);
         var randomRestaurant = results[rng];
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         console.log(randomRestaurant);
         createMarker(randomRestaurant);
+        
+    } else if (results.length === 0) {
+        $('#errorModal').modal('show');
     }
     //Add restaurant to sidebar when "Maybe another time." button is clicked
     newListItem = $("<li class='card-text'>");
