@@ -90,14 +90,8 @@ $("#currentlocation").on("click", function (event) {
     console.log("test")
 });
 $("#mapModal").on("show.bs.modal", function (){
+    google.maps.event.trigger(map, 'resize')
     
-    getLocation().then(position => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-        console.log(latitude)
-        console.log(longitude)
-        return { latitude: latitude, longitude: longitude }
-    }).then(latlng => initMap(latlng))
 });
 $("#buttonChoice1").on("click", function () {
     $("#mapModal").modal('show')
@@ -232,7 +226,6 @@ function callback(results, status) {
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         createPhotoMarker(randomRestaurant);
         console.log(randomRestaurant);
-        google.maps.event.trigger(map, 'resize')
         map.setCenter(results[0].geometry.location);
 
 
@@ -298,7 +291,6 @@ function createPhotoMarker(place) {
    
     
   }
-
 // function zipLocation() {
 //     var geoCoder = new google.maps.Geocoder();
 //     var address = $("#zipCode").val().trim()
