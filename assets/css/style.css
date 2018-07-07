@@ -214,6 +214,9 @@ footer {
     bottom:30px;
     z-index:6;
   }
+  #diceCard {
+    margin: auto;
+  }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -226,10 +229,13 @@ footer {
     margin-bottom: 10px;
     
   }
+  h5 u {
+    margin-left: 20px;
+  }
   #user-login {
     position:absolute;
     top:160px;
-    right:325px;
+    right:310px;
     z-index:3;
     width: auto;
   }
