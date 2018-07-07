@@ -90,6 +90,7 @@ $("#currentlocation").on("click", function (event) {
     //showPosition();
     console.log("test")
 });
+
 $("#mapModal").on("show.bs.modal", function (){
     
     getLocation().then(position => {
@@ -100,10 +101,27 @@ $("#mapModal").on("show.bs.modal", function (){
         return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
 });
+
 $("#buttonChoice1").on("click", function () {
     $("#mapModal").modal('show')
     
-})
+});
+
+$("#buttonChoice2").on("click", function () {
+    // newRestaurantLink.text(randomRestaurant.name);
+    // newListItem.append(newRestaurantLink);
+    // $("#tryLater").append(newListItem);
+
+    //Function to push restaurant name and address to Firebase
+    restaurantName = randomRestaurant.name;
+    restaurantAddress = randomRestaurant.vicinity;
+
+    firebase.database().ref("/users/testUser").push({
+        restaurantName: restaurantName,
+        restaurantAddress: restaurantAddress,
+
+    });
+});
 
 $(".choice").on("click", function () {
 
@@ -244,25 +262,14 @@ function callback(results, status) {
     newListItem = $("<li class='card-text'>");
     newRestaurantLink = $("<a class='card-link'>");
 
-    $("#buttonChoice2").on("click", function () {
-        // newRestaurantLink.text(randomRestaurant.name);
-        // newListItem.append(newRestaurantLink);
-        // $("#tryLater").append(newListItem);
 
-        //Function to push restaurant name and address to Firebase
-        restaurantName = randomRestaurant.name;
-        restaurantAddress = randomRestaurant.vicinity;
-
-        firebase.database().ref("/users/testUser").push({
-            restaurantName: restaurantName,
-            restaurantAddress: restaurantAddress,
-
-        });
-    });
 }
+
+
 
 //Firebase watcher and initial loader
 firebase.database().ref("/users/testUser").on("child_added", function (snapshot) {
+    
     restaurantName = snapshot.val().restaurantName;
     restaurantAddress = snapshot.val().restaurantAddress;
     newListItem = $("<li class='card-text'>");
@@ -280,7 +287,10 @@ firebase.database().ref("/users/testUser").on("child_added", function (snapshot)
     $(".card-link").on("click", function () {
         window.open('http://google.com/search?q=' + q);
     });
+}, function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
 });
+
 //Generate Map Marker for chosen restaurant
 function createPhotoMarker(place) {
     var photos = place.photos;
