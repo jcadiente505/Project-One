@@ -291,6 +291,3 @@ function geoCode() {
 }
 
 window.onload = login;
-
-
-
