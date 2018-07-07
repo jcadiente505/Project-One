@@ -90,13 +90,19 @@ $("#currentlocation").on("click", function (event) {
     //showPosition();
     console.log("test")
 });
-
-$("#mapModal").on("shown.bs.modal", function(){
-    initMap();
-})
-
+$("#mapModal").on("show.bs.modal", function (){
+    
+    getLocation().then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude)
+        console.log(longitude)
+        return { latitude: latitude, longitude: longitude }
+    }).then(latlng => initMap(latlng))
+});
 $("#buttonChoice1").on("click", function () {
-    $("mapModal").modal("show")
+    $("#mapModal").modal('show')
+    
 })
 
 $(".choice").on("click", function () {
@@ -227,6 +233,10 @@ function callback(results, status) {
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         createPhotoMarker(randomRestaurant);
         console.log(randomRestaurant);
+        google.maps.event.trigger(map, 'resize')
+        map.setCenter(results[0].geometry.location);
+
+
     } else if (results.length === 0) {
         $('#errorModal').modal('show');
     }
