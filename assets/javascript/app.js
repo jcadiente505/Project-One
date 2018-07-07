@@ -1,27 +1,5 @@
 
-//Function for API request
-function restaurantGenerator() {
-
-    var location = ""; //Take from input
-    var queryURL = "https://api.yelp.com/v3/businesses/search/location=" + location + "";
-
-    // Creating an AJAX call for the specific movie button being clicked
-    // $.ajax({
-    //   url: queryURL,
-    //   method: "GET",
-    //   headers: {
-    //     authorization: "Bearer r4tHEAx0_RoSv1YoH333ehyVe30h1Y4QHVtbeMt6HDoKXsalEFLBpwSL7Qw8cXYgtEK4Osk72XJ-qpHUqxT_Jci-gzE2hnunA27YZGGAtgMrCEEdIT_rBO3Q1Wc1W3Yx"
-
-
-    //   }
-    // }).then(function(response) {
-
-    //     console.log(response);
-
-    // });    
-    console.log("working function call");
-}
-
+//Initialize Firebase
 var config = {
     apiKey: "AIzaSyCIahuUvE2G9jVP5xRCXDA6gmyMVEHp7xo",
     authDomain: "food-finder-app-ee43f.firebaseapp.com",
@@ -44,36 +22,44 @@ var longitude
 var latlng
 var infowindow
 var map
-var minPrice
-var maxPrice
 var localUser
-var roll1 = 0
-var roll2 = 0
-var totalRoll = (roll1 + roll2)
 var restaurantName
 var restaurantAddress
 var randomRestaurant
-minPrice = parseInt($("#priceOption1").val().trim());
-maxPrice = parseInt($("#priceOption2").val().trim());
+
 // user input variables
 var options = {
     enableHighAccuracy: true,
     timeout: 5000
 };
-// firebase database user object
-// dynamic content variables
-// API queryURL's
-// search parameters variable
-// API Key variable
 
 // ---------firebase on value listener--------------//
 
-// ----------button click listeners---------------//
-$("#test-btn").on("click", function () {
-    restaurantGenerator();
-    console.log("working click");
+//Firebase watcher and initial loader
+firebase.database().ref("/users/testUser").on("child_added", function (snapshot) {
+    
+    restaurantName = snapshot.val().restaurantName;
+    restaurantAddress = snapshot.val().restaurantAddress;
+    newListItem = $("<li class='card-text'>");
+    newRestaurantLink = $("<a class='card-link' target='_blank'>");
+    var q = restaurantName + " " + restaurantAddress;
+    var googleSearch = "http://google.com/search?q="
+    newRestaurantLink.attr("href", googleSearch + q);
+    newRestaurantLink.text(restaurantName);
+    newListItem.append(newRestaurantLink);
+    $("#tryLater").append(newListItem);
+   
+
+    $(".card-link").on("click", function () {
+        window.open('http://google.com/search?q=' + q);
+    });
+}, function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
 });
 
+// ----------button click listeners---------------//
+
+//Event handler for current location
 $("#currentlocation").on("click", function (event) {
 
     event.preventDefault();
@@ -88,25 +74,26 @@ $("#currentlocation").on("click", function (event) {
         return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
     //showPosition();
-    console.log("test")
+   
 });
 
+//Event handler for map modal
 $("#mapModal").on("show.bs.modal", function (){
     
     getLocation().then(position => {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        console.log(latitude)
-        console.log(longitude)
         return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
 });
 
+//Event handler to show map
 $("#buttonChoice1").on("click", function () {
     $("#mapModal").modal('show')
     
 });
 
+//Event handler to add restaurant to list
 $("#buttonChoice2").on("click", function () {
     // newRestaurantLink.text(randomRestaurant.name);
     // newListItem.append(newRestaurantLink);
@@ -135,7 +122,7 @@ $(".choice").on("click", function () {
         return { latitude: latitude, longitude: longitude }
     }).then(latlng => initMap(latlng))
     //showPosition();
-    console.log("test")
+    
 
 })
 
@@ -145,35 +132,21 @@ $("#zipCodeSubmit").on("click", function (event) {
 
     // CODE FOR GETTING LOCATION BASED ON ZIP CODE
     zipCode = parseInt($("#zipCode").val())
-    console.log(zipCode)
     console.log($("#zipCode").val())
     geoCode();
 
-    console.log(event)
+   
 });
 
+//Event handler to logout
 $("#logout-btn").on("click", function () {
     logout();
 });
 
 
-// ----------Firebase value listener----------//
-
-// //Any changes to the users database or page load
-// database.ref().on("value", function (snapshot) {
-
-//     //check if the user exists in the database, if so update their data
-//     if (snapshot.child("/newUser/").exists()) {
-//             console.log("it exists");
-//     } else {
-//         database.ref('/users/').push("/newUser/");
-//         console.log("to database");
-//     };
-
-// });
 // ------------Functions-----------------//
 
-
+//login function
 function login() {
     function newLogin(user) {
         if (user) {
@@ -189,6 +162,7 @@ function login() {
 
 };
 
+//logout function
 function logout() {
     firebase.auth().signOut().then(function () {
         // Sign-out successful.
@@ -198,6 +172,7 @@ function logout() {
     });
 };
 
+//function to grap users display name
 function app(user) {
     $("#username").text(user.displayName);
     
@@ -205,22 +180,21 @@ function app(user) {
 };
 
 
-
+//function to get users location
 function getLocation(options) {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, options);
-        console.log(resolve)
+        
     });
 }
 
+//error handling
 function errorHandle(error) {
     console.log(error)
 }
 
 //Generate map and call to Google Places API
 function initMap(latlong) {
-    console.log(latitude);
-    console.log(longitude)
     var latlng = new google.maps.LatLng(latlong.latitude, latlong.longitude);
     var myOptions = {
         zoom: 14,
@@ -250,7 +224,6 @@ function callback(results, status) {
         randomRestaurant = results[rng];
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         createPhotoMarker(randomRestaurant);
-        console.log(randomRestaurant);
         google.maps.event.trigger(map, 'resize')
         map.setCenter(results[0].geometry.location);
 
@@ -263,33 +236,7 @@ function callback(results, status) {
     newRestaurantLink = $("<a class='card-link'>");
 
 
-}
-
-
-
-//Firebase watcher and initial loader
-firebase.database().ref("/users/testUser").on("child_added", function (snapshot) {
-    
-    restaurantName = snapshot.val().restaurantName;
-    restaurantAddress = snapshot.val().restaurantAddress;
-    newListItem = $("<li class='card-text'>");
-    newRestaurantLink = $("<a class='card-link' target='_blank'>");
-    var q = restaurantName + " " + restaurantAddress;
-    var googleSearch = "http://google.com/search?q="
-    newRestaurantLink.attr("href", googleSearch + q);
-    newRestaurantLink.text(restaurantName);
-    newListItem.append(newRestaurantLink);
-    $("#tryLater").append(newListItem);
-    console.log(restaurantName);
-    console.log(restaurantAddress);
-
-
-    $(".card-link").on("click", function () {
-        window.open('http://google.com/search?q=' + q);
-    });
-}, function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-});
+};
 
 //Generate Map Marker for chosen restaurant
 function createPhotoMarker(place) {
@@ -304,8 +251,8 @@ function createPhotoMarker(place) {
       title: place.name,
       
     });
-    console.log(place.photos.length);
-    $("#carousel-1").attr("src", photos[0].getUrl({'maxWidth': 500, 'maxHeight': 900}));
+    
+    $("#carousel-1").attr("src", photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 1800}));
    
     
   }
