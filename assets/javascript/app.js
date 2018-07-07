@@ -90,14 +90,7 @@ $("#currentlocation").on("click", function (event) {
     console.log("test")
 });
 $("#mapModal").on("show.bs.modal", function (){
-    
-    getLocation().then(position => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-        console.log(latitude)
-        console.log(longitude)
-        return { latitude: latitude, longitude: longitude }
-    }).then(latlng => initMap(latlng))
+    initMap(callback)
 });
 $("#buttonChoice1").on("click", function () {
     $("#mapModal").modal('show')
@@ -308,24 +301,24 @@ function createMarker(place) {
 //     });
 // };
 
-function geoCode() {
+// function geoCode() {
 
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-        params: {
-            componentRestrictions: {
-                postalCode: zipCode
+//     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+//         params: {
+//             componentRestrictions: {
+//                 postalCode: zipCode
 
-            },
-            key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
-        }
-    }).then(response => {
-        console.log(response)
-    }).catch(error => {
-        console.log(error)
-    })
-}
+//             },
+//             key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
+//         }
+//     }).then(response => {
+//         console.log(response)
+//     }).catch(error => {
+//         console.log(error)
+//     })
+// }
 
-window.onload = login;
+// window.onload = login;
 
 
 
