@@ -1,4 +1,3 @@
-
 //Function for API request
 function restaurantGenerator() {
 
@@ -91,7 +90,14 @@ $("#currentlocation").on("click", function (event) {
     console.log("test")
 });
 $("#mapModal").on("show.bs.modal", function (){
-    initMap(callback)
+    
+    getLocation().then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude)
+        console.log(longitude)
+        return { latitude: latitude, longitude: longitude }
+    }).then(latlng => initMap(latlng))
 });
 $("#buttonChoice1").on("click", function () {
     $("#mapModal").modal('show')
@@ -326,7 +332,8 @@ function createPhotoMarker(place) {
 //     })
 // }
 
-// window.onload = login;
+window.onload = login;
+
 
 
 
