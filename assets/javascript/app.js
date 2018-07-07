@@ -90,8 +90,8 @@ $("#currentlocation").on("click", function (event) {
     //showPosition();
     console.log("test")
 });
-$("#mapModal").on("show.bs.modal", function (){
-    
+$("#mapModal").on("show.bs.modal", function () {
+
     getLocation().then(position => {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
@@ -102,7 +102,7 @@ $("#mapModal").on("show.bs.modal", function (){
 });
 $("#buttonChoice1").on("click", function () {
     $("#mapModal").modal('show')
-    
+
 })
 
 $(".choice").on("click", function () {
@@ -182,7 +182,7 @@ function logout() {
 
 function app(user) {
     $("#username").text(user.displayName);
-    
+
     localUser = user.email;
 };
 
@@ -243,7 +243,7 @@ function callback(results, status) {
     //Add restaurant to sidebar when "Maybe another time." button is clicked
     newListItem = $("<li class='card-text'>");
     newRestaurantLink = $("<a class='card-link'>");
-
+}
     $("#buttonChoice2").on("click", function () {
         // newRestaurantLink.text(randomRestaurant.name);
         // newListItem.append(newRestaurantLink);
@@ -259,7 +259,7 @@ function callback(results, status) {
 
         });
     });
-}
+
 
 //Firebase watcher and initial loader
 firebase.database().ref("/users/testUser").on("child_added", function (snapshot) {
@@ -285,20 +285,20 @@ firebase.database().ref("/users/testUser").on("child_added", function (snapshot)
 function createPhotoMarker(place) {
     var photos = place.photos;
     if (!photos) {
-      return;
+        return;
     }
-  
+
     var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location,
-      title: place.name,
-      
+        map: map,
+        position: place.geometry.location,
+        title: place.name,
+
     });
     console.log(place.photos.length);
-    $("#carousel-1").attr("src", photos[0].getUrl({'maxWidth': 500, 'maxHeight': 900}));
-   
-    
-  }
+    $("#carousel-1").attr("src", photos[0].getUrl({ 'maxWidth': 500, 'maxHeight': 900 }));
+
+
+}
 
 // function zipLocation() {
 //     var geoCoder = new google.maps.Geocoder();
