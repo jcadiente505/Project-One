@@ -52,6 +52,7 @@ var roll2 = 0
 var totalRoll = (roll1 + roll2)
 var restaurantName
 var restaurantAddress
+var randomRestaurant
 minPrice = parseInt($("#priceOption1").val().trim());
 maxPrice = parseInt($("#priceOption2").val().trim());
 // user input variables
@@ -97,7 +98,7 @@ $("#buttonChoice1").on("click", function () {
     
 })
 
-$("#dice").on("click", function () {
+$(".choice").on("click", function () {
 
     event.preventDefault();
 
@@ -133,17 +134,18 @@ $("#logout-btn").on("click", function () {
 
 // ----------Firebase value listener----------//
 
-//Any changes to the users database or page load
-database.ref().on("value", function (snapshot) {
+// //Any changes to the users database or page load
+// database.ref().on("value", function (snapshot) {
 
-    //check if the user exists in the database, if so update their data
-    if (snapshot.child(localUser).exists()) {
-        database.ref('/users/' + localUser).set(localUser);
-    } else {
-        database.ref('/users/').push(localUser);
-    };
+//     //check if the user exists in the database, if so update their data
+//     if (snapshot.child("/newUser/").exists()) {
+//             console.log("it exists");
+//     } else {
+//         database.ref('/users/').push("/newUser/");
+//         console.log("to database");
+//     };
 
-});
+// });
 // ------------Functions-----------------//
 
 
@@ -173,9 +175,8 @@ function logout() {
 
 function app(user) {
     $("#username").text(user.displayName);
-    console.log(user.displayName);
+    
     localUser = user.email;
-
 };
 
 
@@ -212,19 +213,22 @@ function initMap(latlong) {
         openNow: true
 
     }, callback);
+
+
 };
 
-//Callback for handling returned restaurant objectg
+//Callback for handling returned restaurant object
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK && results.length != 0) {
         //Randomize
         var rng = Math.floor((Math.random() * results.length) + 1);
-        var randomRestaurant = results[rng];
+        randomRestaurant = results[rng];
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
+        createPhotoMarker(randomRestaurant);
         console.log(randomRestaurant);
-        createMarker(randomRestaurant);
         google.maps.event.trigger(map, 'resize')
         map.setCenter(results[0].geometry.location);
+
 
     } else if (results.length === 0) {
         $('#errorModal').modal('show');
@@ -271,19 +275,23 @@ firebase.database().ref("/users/testUser").on("child_added", function (snapshot)
     });
 });
 //Generate Map Marker for chosen restaurant
-function createMarker(place) {
-    var placeLoc = place.geometry.location;
+function createPhotoMarker(place) {
+    var photos = place.photos;
+    if (!photos) {
+      return;
+    }
+  
     var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location
+      map: map,
+      position: place.geometry.location,
+      title: place.name,
+      
     });
-
-    //Listener to display information about map markers  
-    google.maps.event.addListener(marker, 'click', function () {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
-    });
-}
+    console.log(place.photos.length);
+    $("#carousel-1").attr("src", photos[0].getUrl({'maxWidth': 500, 'maxHeight': 900}));
+   
+    
+  }
 
 // function zipLocation() {
 //     var geoCoder = new google.maps.Geocoder();
