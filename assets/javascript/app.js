@@ -79,12 +79,8 @@ $("#currentlocation").on("click", function (event) {
 
 //Event handler for map modal
 $("#mapModal").on("show.bs.modal", function (){
+    google.maps.event.trigger(map, 'resize')
     
-    getLocation().then(position => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-        return { latitude: latitude, longitude: longitude }
-    }).then(latlng => initMap(latlng))
 });
 
 //Event handler to show map
@@ -224,7 +220,7 @@ function callback(results, status) {
         randomRestaurant = results[rng];
         $("#restaurant-name").text("Your suggested restaurant is: " + randomRestaurant.name);
         createPhotoMarker(randomRestaurant);
-        google.maps.event.trigger(map, 'resize')
+        console.log(randomRestaurant);
         map.setCenter(results[0].geometry.location);
 
 
@@ -256,7 +252,6 @@ function createPhotoMarker(place) {
    
     
   }
-
 // function zipLocation() {
 //     var geoCoder = new google.maps.Geocoder();
 //     var address = $("#zipCode").val().trim()
@@ -273,21 +268,21 @@ function createPhotoMarker(place) {
 //     });
 // };
 
-function geoCode() {
+// function geoCode() {
 
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-        params: {
-            componentRestrictions: {
-                postalCode: zipCode
+//     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+//         params: {
+//             componentRestrictions: {
+//                 postalCode: zipCode
 
-            },
-            key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
-        }
-    }).then(response => {
-        console.log(response)
-    }).catch(error => {
-        console.log(error)
-    })
-}
+//             },
+//             key: 'AIzaSyByVBnGeFonjpCvf6sWFqbaBr9A3RidvsA'
+//         }
+//     }).then(response => {
+//         console.log(response)
+//     }).catch(error => {
+//         console.log(error)
+//     })
+// }
 
 window.onload = login;
